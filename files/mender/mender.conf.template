@@ -1,0 +1,9 @@
+{
+    "InventoryPollIntervalSeconds": 5,
+    "RetryPollIntervalSeconds": 1,
+    "RootfsPartA": "/dev/mmcblk0p2",
+    "RootfsPartB": "/dev/mmcblk0p3",
+    "ServerURL": "{SERVER_URL}",
+    "TenantToken": "{TENANT_TOKEN}",
+    "UpdatePollIntervalSeconds": 5
+}

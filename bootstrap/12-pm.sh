@@ -25,6 +25,11 @@ if ${ALLOW_UNAUTHENTICATED}; then
     fi
 fi
 
+if ${ENABLE_MENDER}; then
+    add_package_to_includes ca-certificates
+    add_package_to_includes u-boot-tools
+fi
+
 if ${ENABLE_SUDO}; then
     add_package_to_includes sudo
 fi

@@ -24,6 +24,7 @@ Pieman is a script for creating custom OS images for single-board computers such
     + [Users](#users)
     + [Image](#image)
     + [Pieman-specific](#pieman-specific)
+    + [Extra](#extra)
 - [Daily image builds](#daily-image-builds)
 - [Authors](#authors)
 - [Licensing](#licensing)
@@ -50,8 +51,17 @@ Pieman is a script for creating custom OS images for single-board computers such
 
 #### Optional
 
-* bzip2
-* xz
+* To enable `COMPRESS_WITH_BZIP2` and `COMPRESS_WITH_XZ`:
+  * bzip2
+  * xz
+* To enable [Mender](https://mender.io) support:
+  * Development libraries and header files related to C standard library (make sure the package, which is going to be installed to satisfy the dependency, includes `/usr/include/sys/types.h`)
+  * C programming language compiler
+  * Go programming language compiler
+  * bc
+  * dtc
+  * make
+  * mkimage
 
 ### Supported platforms
 
@@ -376,6 +386,40 @@ Note, that the parameter must follow the format "uid:gid" where `uid` and `gid` 
 ##### PYTHON="$(which python3)"
 
 Allows specifying the Python 3 interpreter to be used when calling the Pieman-specific utilities. 
+
+#### Extra
+
+##### CREATE_ONLY_ARTIFACT=false
+
+Makes Pieman restrict itself to only creating an artifact (a file with the `.mender` extension) which can later be uploaded to [hosted.mender.io](https://hosted.mender.io) to provide for OTA updates.
+
+Note, that the parameter conflicts with `CREATE_ONLY_CHROOT` and `ENABLE_MENDER`.
+
+##### ENABLE_MENDER=false
+
+Specifies whether to install the Mender client to provide for OTA updates.
+
+Note that the OTA updates support is currently limited to 32-bit Raspbian and Ubuntu for Raspberry Pi 3 Model B.
+
+##### MENDER_ARTIFACT_NAME="release-1_1.6.0"
+
+...
+
+##### MENDER_DATA_SIZE=128
+
+Specifies the size in megabytes of the data partition.
+
+The parameter is used only when `ENABLE_MENDER` is set to `true`.
+
+##### MENDER_TENANT_TOKEN=""
+
+Specifies a token which identifies which tenant a device belongs to. It requires an account on [hosted.mender.io](https://hosted.mender.io).
+
+The parameter is used only when `ENABLE_MENDER` is set to `true`.
+
+##### MENDER_SERVER_URL="https://hosted.mender.io"
+
+...
 
 ## Daily image builds
 
